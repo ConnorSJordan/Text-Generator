@@ -7,39 +7,36 @@ import java.util.Scanner;
  * generates text with an N-gram model
  */
 public class TextGen {
-    StringBuilder();
+    StringBuilder dataString;
     String[] results; // for results from split method 
-    //hash table grams;
+    MyHashTable<String, String> nGrams;
     private File data;
 
     /**
      * Constructor for objects of class TextGen
      */
     public TextGen(String fileName) {
+        loadFiles(fileName);
+        results = dataString.toString().split(" ");
+    }
+    
+    public void loadFiles(String fileName) {
         try {
             data = new File(fileName);
+            nGrams = new MyHashTable<String, String>();
+            dataString = new StringBuilder();
             Scanner scanner = new Scanner(data);
             while (scanner.hasNextLine()) {
-                text += scanner.nextLine();
+                String nextLine = scanner.nextLine();
+                dataString.append(nextLine);
             }
             scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        
-    }
-    
-    public String[] split(File toBeSplit) {
-        
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
     public String getNextWord(String prevWord) {
         
     }
