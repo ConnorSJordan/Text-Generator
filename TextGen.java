@@ -20,9 +20,9 @@ public class TextGen {
         loadFiles(fileName);
         System.out.println(dataString);
         results = dataString.toString().split(" +");
-        for(int i = 0; i< results.length; i++) {
+        /*for(int i = 0; i< results.length; i++) {
             System.out.println("'" + results[i] + "'");
-        }
+        }*/
     }
     
     public void loadFiles(String fileName) {
@@ -49,15 +49,14 @@ public class TextGen {
                 for( int k = 0; k < j; k++) {
                     key += results[i + k] + " ";
                 }
-                System.out.println(key);
-                //System.out.println(results[i+j]); // value
-                /*if(nGrams.get(key) != null) {
+                //System.out.println("Key: " + key + "-- Value: " + results[i+j]);
+                if(nGrams.get(key) == null) {
                     ArrayList<String> wordList = new ArrayList<String>();
                     wordList.add(results[i+j]);
                     nGrams.put(key, wordList);
                 } else {
                     nGrams.get(key).add(results[i+j]);
-                }*/
+                }
             }
         }
     }
@@ -66,7 +65,8 @@ public class TextGen {
         return nGrams.toString();
     }
 
-    /*public String getNextWord(String prevWord) {
-        
-    }*/
+    public String getNextWord(String prevWord) {
+        ArrayList<String> temp = nGrams.get(prevWord + " ");
+        return temp.get((int)(Math.random() * temp.size()));
+    }
 }
