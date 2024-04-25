@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class TextGen {
     private StringBuilder dataString;
     private String[] results; // for results from split method 
-    private MyHashTable<String, ArrayList[]> nGrams;
+    private MyHashTable<String, ArrayList<String>> nGrams;
     private File data;
 
     /**
@@ -28,12 +28,12 @@ public class TextGen {
     public void loadFiles(String fileName) {
         try {
             data = new File(fileName);
-            nGrams = new MyHashTable<String, String>();
+            nGrams = new MyHashTable<String, ArrayList<String>>();
             dataString = new StringBuilder();
             Scanner scanner = new Scanner(data);
             while (scanner.hasNextLine()) {
                 String nextLine = scanner.nextLine();
-                dataString.append(nextLine);
+                dataString.append(nextLine + " ");
             }
             scanner.close();
         } catch (FileNotFoundException e) {
@@ -45,12 +45,19 @@ public class TextGen {
     public void makeGrams() {
         for(int i = 0; i < results.length - 6; i++) {
             for (int j = 1; j < 6; j++) {
-                String value = "";
+                String key = "";
                 for( int k = 0; k < j; k++) {
-                    value += results[i + k];
+                    key += results[i + k];
                 }
-                System.out.println(value);
-                nGrams.put(value, results[i+5]);
+                System.out.println(key);
+                System.out.println(results[i+j]); // value
+                if(nGrams.get(key) != null) {
+                    ArrayList<String> wordList = new ArrayList<String>();
+                    wordList.add(results[i+j]);
+                    nGrams.put(key, wordList);
+                } else {
+                    nGrams.get(key).add(results[i+j]);
+                }
             }
         }
     }
