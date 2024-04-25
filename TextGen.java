@@ -47,17 +47,17 @@ public class TextGen {
             for (int j = 1; j < 6; j++) {
                 String key = "";
                 for( int k = 0; k < j; k++) {
-                    key += results[i + k];
+                    key += results[i + k] + " ";
                 }
                 System.out.println(key);
-                System.out.println(results[i+j]); // value
-                if(nGrams.get(key) != null) {
+                //System.out.println(results[i+j]); // value
+                /*if(nGrams.get(key) != null) {
                     ArrayList<String> wordList = new ArrayList<String>();
                     wordList.add(results[i+j]);
                     nGrams.put(key, wordList);
                 } else {
                     nGrams.get(key).add(results[i+j]);
-                }
+                }*/
             }
         }
     }
