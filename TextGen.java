@@ -66,7 +66,7 @@ public class TextGen {
     }
 
     public String getNextWord(String prevWord) {
-        ArrayList<String> temp = nGrams.get(prevWord + " ");
+        ArrayList<String> temp = nGrams.get(prevWord);
         return temp.get((int)(Math.random() * temp.size()));
     }
 }

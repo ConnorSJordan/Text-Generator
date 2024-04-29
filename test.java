@@ -26,16 +26,18 @@ public class test
      * @return    the sum of x and y
      */
     public static void test() {
-        String text = "be";
+        String text = "be ";
         String previousWord = "be ";
         TextGen test = new TextGen("Biden_Speeches.txt");
         test.makeGrams();
         test.nGramsPrint();
-        //System.out.println(test.getNextWord("be "));
-        for (int i = 0; i < 100; i++) {
-            previousWord = test.getNextWord(previousWord);
+        previousWord = test.getNextWord("be ");
+        System.out.println(previousWord);
+        System.out.println(test.getNextWord(previousWord));
+        /*for (int i = 0; i < 100; i++) {
+            previousWord = test.getNextWord(previousWord + " ");
             text += previousWord;
-        }
-        System.out.println(text);
+        }*/
+        //System.out.println(text);
     }
 }
