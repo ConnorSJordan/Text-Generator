@@ -28,13 +28,13 @@ public class test
     public static void test() {
         String text = "be ";
         String previousWord = "be ";
-        TextGen test = new TextGen("Biden_Speeches.txt");
+        TextGen test = new TextGen("edited_Biden.txt", "I");
         test.makeGrams();
-        test.nGramsPrint();
-        previousWord = test.getNextWord("be ");
+        test.getNextWord();
+        /*text += previousWord;
         System.out.println(previousWord);
-        System.out.println(test.getNextWord(previousWord));
-        /*for (int i = 0; i < 100; i++) {
+        System.out.println(test.getNextWord());
+        for (int i = 0; i < 100; i++) {
             previousWord = test.getNextWord(previousWord + " ");
             text += previousWord;
         }*/
