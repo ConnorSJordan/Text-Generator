@@ -84,16 +84,18 @@ public class TextGen {
         String resultWord = startingWord;
         for (int i = 0; i < textWords; i++) {
             history.add(resultWord);
-            for(int j = gramMax; j >= 0; j--) {
-                if (i - j >= 0) {    
+            int size = gramMax;
+            while(size >= 0
+            for(int size = gramMax; size >= 0; size--) {
+                if (i - size >= 0) {    
                     String past5 = "";
-                    for(int k = i - j; k <= i; k++) {
+                    for(int k = i - size; k <= i; k++) {
                         past5 += history.get(k);
                         if(k < i) {
                             past5 += " ";
                         }
                     }
-                    if(nGrams.get(past5) != null) {
+                    if(nGrams.get(past5) != null && nGrams.get(past5).size() > 1 || size == 2) {
                         ArrayList<String> temp = nGrams.get(past5);
                         resultWord = temp.get((int)(Math.random() * temp.size()));
                     }
