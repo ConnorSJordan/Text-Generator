@@ -32,6 +32,9 @@ public class TextGen {
         }*/
     }
     
+    /**
+     * loads the given file and copies it to the dataString array list
+     */
     public void loadFiles(String fileName) {
         try {
             data = new File(fileName);
@@ -49,6 +52,9 @@ public class TextGen {
         }
     }
     
+    /**
+     * generate n-grams of lengths gramMax->2
+     */
     public void makeGrams() {
         for(int i = 0; i < results.length - (gramMax + 1); i++) {
             for (int j = 1; j < gramMax + 1; j++) {
@@ -70,6 +76,9 @@ public class TextGen {
         }
     }
 
+    /**
+     * Gets the next word to be used for nGram generation
+     */
     public void getNextWord() {
         ArrayList<String> history = new ArrayList<String>();
         String resultWord = startingWord;
