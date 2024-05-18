@@ -84,9 +84,11 @@ public class TextGen {
         String resultWord = startingWord;
         for (int i = 0; i < textWords; i++) {
             history.add(resultWord);
+            
             int size = gramMax;
-            while(size >= 0
-            for(int size = gramMax; size >= 0; size--) {
+            boolean wordChosen = false;
+            while(!wordChosen) {
+            //for(int size = gramMax; size >= 0; size--) {
                 if (i - size >= 0) {    
                     String past5 = "";
                     for(int k = i - size; k <= i; k++) {
@@ -95,11 +97,15 @@ public class TextGen {
                             past5 += " ";
                         }
                     }
-                    if(nGrams.get(past5) != null && nGrams.get(past5).size() > 1 || size == 2) {
+                    if(nGrams.get(past5) != null && nGrams.get(past5).size() > 1) {
                         ArrayList<String> temp = nGrams.get(past5);
                         resultWord = temp.get((int)(Math.random() * temp.size()));
+                        wordChosen = true;
+                    } else if (nGrams.get(past5).size() == 1) {
+                        resultWord = nGrams.get(past5).get(0);
                     }
                 }
+                size--;
             }
         }
         for(int i = 0; i < history.size(); i++) {
