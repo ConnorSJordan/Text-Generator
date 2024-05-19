@@ -28,7 +28,7 @@ public class test
     public static void test() {
         String text = "be ";
         String previousWord = "be ";
-        TextGen test = new TextGen("edited_Biden.txt", "I");
+        TextGen test = new TextGen("wiki.txt", "the");
         test.makeGrams();
         test.getNextWord();
         /*text += previousWord;

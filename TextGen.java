@@ -77,41 +77,40 @@ public class TextGen {
     }
 
     /**
-     * Gets the next word to be used for nGram generation
+     * Generates and prints the next word the number of times defines by textWords
      */
     public void getNextWord() {
-        ArrayList<String> history = new ArrayList<String>();
-        String resultWord = startingWord;
+        String history;
+        ArrayList<String> prevWords = new ArrayList<String>();
+        prevWords.add(startingWord);
+        ArrayList<String> nextWords;
+        
+        System.out.print(startingWord);
         for (int i = 0; i < textWords; i++) {
-            history.add(resultWord);
+            int currentSize = gramMax;
+                do {
+                    history = "";
+                    for (int j = gramMax - currentSize; j < 
+                        prevWords.size(); j++) { // Generate history
+                        history += prevWords.get(j);
+                    }
+                    nextWords = nGrams.get(history);
+                    currentSize--;
+                } while((nextWords == null || nextWords.size() == 1) && 
+                        currentSize >= 1); // while size is valid for history
+            int randomSpot = ((int)(Math.random() * ((double)nextWords.size())));
+            // Chooses a random spot in the array from 0 - Size
+            String nextWord = nextWords.get(randomSpot);
             
-            int size = gramMax;
-            boolean wordChosen = false;
-            while(!wordChosen) {
-            //for(int size = gramMax; size >= 0; size--) {
-                if (i - size >= 0) {    
-                    String past5 = "";
-                    for(int k = i - size; k <= i; k++) {
-                        past5 += history.get(k);
-                        if(k < i) {
-                            past5 += " ";
-                        }
-                    }
-                    if(nGrams.get(past5) != null && nGrams.get(past5).size() > 1) {
-                        ArrayList<String> temp = nGrams.get(past5);
-                        resultWord = temp.get((int)(Math.random() * temp.size()));
-                        wordChosen = true;
-                    } else if (nGrams.get(past5).size() == 1) {
-                        resultWord = nGrams.get(past5).get(0);
-                    }
-                }
-                size--;
+            if(prevWords.size() < gramMax) { // If prev words is not full
+                prevWords.add(nextWord);
+            } else { // makes sure  the array is always length gramMax and takes out old words
+                prevWords.remove(0);
+                prevWords.add(nextWord);
             }
-        }
-        for(int i = 0; i < history.size(); i++) {
-            System.out.print(" " + history.get(i));
-            if(i % 10 == 0 && i != 0) {
-                System.out.println("");
+            System.out.print(" " + nextWord);
+            if (i % 12 == 0 && i != 0) { // Next line every 12 words
+                System.out.println("\n");
             }
         }
     }
