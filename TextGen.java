@@ -83,7 +83,7 @@ public class TextGen {
         String history;
         ArrayList<String> prevWords = new ArrayList<String>();
         prevWords.add(startingWord);
-        ArrayList<String> nextWords;
+        ArrayList<String> nextWordChoice;
         
         System.out.print(startingWord);
         for (int i = 0; i < textWords; i++) {
@@ -94,13 +94,13 @@ public class TextGen {
                         prevWords.size(); j++) { // Generate history
                         history += prevWords.get(j);
                     }
-                    nextWords = nGrams.get(history);
+                    nextWordChoice = nGrams.get(history);
                     currentSize--;
-                } while((nextWords == null || nextWords.size() == 1) && 
+                } while((nextWordChoice == null || nextWordChoice.size() == 1) && 
                         currentSize >= 1); // while size is valid for history
-            int randomSpot = ((int)(Math.random() * ((double)nextWords.size())));
+            int randomSpot = ((int)(Math.random() * ((double)nextWordChoice.size())));
             // Chooses a random spot in the array from 0 - Size
-            String nextWord = nextWords.get(randomSpot);
+            String nextWord = nextWordChoice.get(randomSpot);
             
             if(prevWords.size() < gramMax) { // If prev words is not full
                 prevWords.add(nextWord);
